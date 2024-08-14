@@ -1,6 +1,5 @@
 # Sistem masuk kereta api
 # Train entry system
-
 import os
 import platform
 import locale
