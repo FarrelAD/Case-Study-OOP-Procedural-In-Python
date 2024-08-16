@@ -220,7 +220,7 @@ def check_actual_user_data(user_ticket):
             is_found_not_match = False
             if users[current_user]['nama'] != actual_user['nama']:
                 is_found_not_match = True
-                print('\033[31mKode tiket : ', actual_user['kode tiket'], '\033[0m')
+                print('\033[31mNama : ', actual_user['nama'], '\033[0m')
             else:
                 print('Nama : ', actual_user['nama'])
             
