@@ -30,7 +30,7 @@ class Admin:
         },
         {
             'ticket code' : '1JH2B8',
-            'train code' : 'Malabar',
+            'train code' : 'Penataran Dhoho',
             'departure station' : 'Stasiun Solo Balapan',
             'departure time' : '04:40',
             'destination station' : 'Stasiun Kertosono',
@@ -40,7 +40,7 @@ class Admin:
         }, 
         {
             'ticket code' : 'KAS12K',
-            'train code' : 'Argo Lawu',
+            'train code' : 'Penataran Dhoho',
             'departure station' : 'Stasiun Banyuwangi',
             'departure time' : '10:15',
             'destination station' : 'Stasiun Jember',

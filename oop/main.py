@@ -35,13 +35,14 @@ def main():
     user_input_menu = 1
     while user_input_menu < 5 and user_input_menu > 0:
         clear_terminal()
+        print('Antrian saat ini [', len(operator.queue.queuers), '/ 10 ]')
         user_input_menu =  display_main_menu()
         if user_input_menu == 1:
             operator.check_user_data()
         elif user_input_menu == 2:
             operator.check_user_stuffs()
         elif user_input_menu == 3:
-            operator.open_departure_gate()    
+            operator.open_departure_gate(operator.train_schedules[operator.current_train])
         elif user_input_menu == 4:
             exit()
 

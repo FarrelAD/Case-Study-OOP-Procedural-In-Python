@@ -1,4 +1,5 @@
 import time
+import locale
 
 from DepartureGate import DepartureGate
 from Platform import Platform
@@ -15,6 +16,13 @@ class Operator:
         self.tickets = tickets
         self.waiting_space = waiting_space
         self.queue = Queue(10, tickets, users)
+        self.train_schedules = [
+            'Penataran Dhoho',
+            'Gajayana',
+            'Argo Lawu'
+        ]
+        self.current_train = 0
+        self.current_user = None
 
     def check_user_data(self):
         queuer = self.queue.check_queuer_data()
@@ -79,6 +87,7 @@ class Operator:
                 
                 if not is_found_data_not_match:
                     queuer.is_valid = True
+                    self.current_user = queuer
                 else:
                     print('Data penumpang tidak valid!')
             else:
@@ -92,6 +101,42 @@ class Operator:
         self.queue.rearrange_queue()
         self.queue.add_queue()
     
+    def check_user_stuffs(self):
+        if self.current_user != None:
+            stuffs = self.current_user.stuffs
+            if stuffs:
+                for stuff in stuffs.stuffs_data:
+                    print('Nama barang: ', stuff.name)
+                    print('Berat: ', stuff.weight, 'kg')
+                    print('Ukuran: p=', stuff.length, 'cm, l=', stuff.width, 'cm, t=', stuff.height, 'cm')
+                    print('-----------------------------------------')
+                input('Lanjutkan => ')
+                self.calculate_user_fine(stuffs)
+                self.current_user = None
+            else: 
+                print('Penumpang tidak membawa barang bawaan apapun')
+        else:
+            print('Pastikan penumpang memiliki tiket yang valid terlebih dahulu!')
+        
+        input('\nLanjutkan => ')
+
+    def calculate_user_fine(self, stuffs):
+        print('Menghitung denda yang didapat')
+        total_fine = 0
+        for stuff in stuffs.stuffs_data:
+            volume = stuff.length * stuff.width * stuff.height
+            weight = stuff.weight
+            
+            if volume > 30000:
+                total_fine += volume % 30000 / 5000 * 10000
+            
+            if weight > 5:
+                total_fine += weight % 5 * 5000
+        
+        self.current_user.fine = total_fine
+        locale.setlocale(locale.LC_ALL, 'id_ID.UTF-8')
+        print('Penumpang akan dikenakan denda sebesar Rp ', locale.currency(total_fine, grouping=True))
+
     def open_departure_gate(self, train_code):
         self.gate.open_gate()
         for people in self.waiting_space.peoples:
@@ -99,6 +144,8 @@ class Operator:
                 self.platform.add_people_to_platform(self.waiting_space.move_people(people)[0])
                 print(people.user.name, ' memasuki peron')
                 time.sleep(0.5)
+        
+        self.current_train += 1
         
     def close_departure_gate(self):
         self.gate.close_gate()
