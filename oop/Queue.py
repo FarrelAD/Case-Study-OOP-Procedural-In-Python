@@ -32,8 +32,8 @@ class Queue:
                 'user' : users.users_data[4],
             },
             {
-                'ticket' : None, 
-                'user' : None
+                'ticket' : tickets.tickets_data[3], 
+                'user' : users.users_data[3]
             },
             {
                 'ticket' : None,

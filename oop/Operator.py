@@ -29,6 +29,7 @@ class Operator:
         if queuer and queuer.ticket and queuer.user:
             print('Kode tiket : ', queuer.ticket.ticket_code)
             print('Nama : ', queuer.user.name)
+            print('Kode kerata : ', queuer.ticket.train_code)
             print('Stasiun awal : ', queuer.ticket.departure_station, '/', queuer.ticket.departure_time)
             print('Stasiun tujuan : ', queuer.ticket.destination_station, '/', queuer.ticket.arrival_time)
             print('Gerbong : ', queuer.ticket.carriage)
@@ -58,6 +59,11 @@ class Operator:
                     print('\033[31mNama : ', actual_user.user.name, '\033[0m')
                 else:
                     print('Nama : ', actual_user.user.name)
+                
+                if queuer.ticket.train_code != actual_user.ticket.train_code:
+                    print('\033[31mKode kerata : ', queuer.ticket.train_code, '\033[0m')
+                else:
+                    print('Kode kerata : ', queuer.ticket.train_code)
                 
                 if queuer.ticket.departure_station != actual_user.ticket.departure_station:
                     is_found_data_not_match = True
@@ -138,14 +144,21 @@ class Operator:
         print('Penumpang akan dikenakan denda sebesar Rp ', locale.currency(total_fine, grouping=True))
 
     def open_departure_gate(self, train_code):
-        self.gate.open_gate()
-        for people in self.waiting_space.peoples:
-            if people.ticket.train_code == train_code:
-                self.platform.add_people_to_platform(self.waiting_space.move_people(people)[0])
-                print(people.user.name, ' memasuki peron')
-                time.sleep(0.5)
+        if self.current_train < len(self.train_schedules):
+            self.gate.open_gate()
+            for people in self.waiting_space.peoples:
+                print('mencoba!')
+                if people.ticket.train_code == train_code:
+                    self.platform.add_people_to_platform(self.waiting_space.move_people(people))
+                    print(people.user.name, ' memasuki peron')
+                    time.sleep(0.5)
+            
+            self.current_train += 1
+        else:
+            print('Tidak ada jadwal kereta yang tersedia lagi!')
         
-        self.current_train += 1
+        input('Lanjutkan => ')
         
     def close_departure_gate(self):
         self.gate.close_gate()
+        input('Lanjutkan => ')

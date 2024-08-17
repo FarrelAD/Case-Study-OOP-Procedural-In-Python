@@ -10,8 +10,9 @@ def display_main_menu():
 input('''
 1. Cek data pengguna
 2. Cek barang bawaan pengguna
-3. Buka pintu masuk
-4. Keluar
+3. Buka gerbang keberangkatan
+4. Tutup gerbang keberangkatan
+9. Keluar
 '''))
 
 def clear_terminal():
@@ -44,7 +45,11 @@ def main():
         elif user_input_menu == 3:
             operator.open_departure_gate(operator.train_schedules[operator.current_train])
         elif user_input_menu == 4:
+            operator.close_departure_gate()
+        elif user_input_menu == 9:
+            print('Bye!')
             exit()
+            
 
 if __name__ == '__main__':
     main()
