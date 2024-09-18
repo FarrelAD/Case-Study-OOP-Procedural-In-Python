@@ -2,7 +2,7 @@
     <img src="https://media.giphy.com/media/9d1Fo0XyIYXzW/giphy.gif?cid=ecf05e47zh2jss789s34ywvq1u7tjfbz54rku9a7n2qynngx&ep=v1_gifs_search&rid=giphy.gif&ct=g" alt="Spongebob dancing">
 </div>
 
-# A case study of implementing OOP and procedural programming paradigm in Python
+# A Case Study on Implementing OOP and Procedural Programming Paradigms in Python
 A programming paradigm is kind of style/architecture to write a program. There are a lot of programming paradigm out there. Let I mention here, object-oriented-programming (usually call as OOP), procedural, functional, visual programming, logic programming, and many more. There is not the best programmning out there. A programming paradigm might be the best for some case but not in other case. 
 
 > 💡Anyway, not all programming language support all programming paradigm. Some of them already design to focus on specific task. So, it might not suitable to try implement another programming paradigm to that programming language.
